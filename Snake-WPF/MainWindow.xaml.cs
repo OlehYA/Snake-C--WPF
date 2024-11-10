@@ -20,7 +20,7 @@ namespace Snake_WPF
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWndVM();
+            DataContext = new MainWndVM(this);
         }
     }
 }
