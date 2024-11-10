@@ -5,8 +5,72 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Snake_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="700" Width="650">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
 
+        <ItemsControl 
+            ItemsSource="{Binding AllCells}"
+            Background="Aqua"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ItemsControl ItemsSource="{Binding}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True"
+                                            Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Width="50" Height="50"
+                                      Margin="1">
+                                    <Grid.Style>
+                                        <Style TargetType="Grid">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CellType}" Value="None">
+                                                    <Setter Property="Background" Value="White"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding CellType}" Value="Sanke">
+                                                    <Setter Property="Background" Value="LightPink"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding CellType}" Value="Food">
+                                                    <Setter Property="Background" Value="LightGreen"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <Button Grid.Row="1" Command="{Binding StartStopComand}">
+            <Button.Content>
+                <TextBlock>
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ContinueGame}" Value="True">
+                                    <Setter Property="Text" Value="Stop"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ContinueGame}" Value="False">
+                                    <Setter Property="Text" Value="Start"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Button.Content>
+        </Button>
     </Grid>
 </Window>

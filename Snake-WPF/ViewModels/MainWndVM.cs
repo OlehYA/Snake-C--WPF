@@ -39,8 +39,10 @@ namespace Snake_WPF.ViewModels
                 var rowList = new List<CellVM>();
                 for (int colum = 0; colum < _columnCount; colum++)
                 {
-
+                    var cell = new CellVM(row, colum);
+                    rowList.Add(cell);
                 }
+                AllCells.Add(rowList);
             }
         }
     }

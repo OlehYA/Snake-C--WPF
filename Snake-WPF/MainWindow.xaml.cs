@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Snake_WPF.ViewModels;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +20,7 @@ namespace Snake_WPF
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWndVM();
         }
     }
 }
